@@ -1,13 +1,10 @@
 # C++ Examples
 Getting to know C++20.
-<!-- 
-[![codecov](https://codecov.io/gh/lefticus/cpp_starter_project/branch/master/graph/badge.svg)](https://codecov.io/gh/lefticus/cpp_starter_project)
--->
+
+[![codecov](https://codecov.io/gh/TimConnelly/CppExamples/branch/master/graph/badge.svg?token=HR8Z5LCOR7)](https://codecov.io/gh/TimConnelly/CppExamples)
+
 [![Build Status](https://travis-ci.com/TimConnelly/CppExamples.svg?token=nsHDt6mypc3pZXgQs6fg&branch=master)](https://travis-ci.com/TimConnelly/CppExamples)
 
-<!--
-[![Build status](https://ci.appveyor.com/api/projects/status/ro4lbfoa7n0sy74c/branch/master?svg=true)](https://ci.appveyor.com/project/lefticus/cpp-starter-project/branch/master)
--->
 ![CMake](https://github.com/TimConnelly/CppExamples/workflows/CMake/badge.svg)
 
 
