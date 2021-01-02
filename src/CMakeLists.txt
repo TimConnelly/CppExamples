@@ -41,6 +41,10 @@ if(CPP_STARTER_USE_NANA)
   add_subdirectory(nana)
 endif()
 
+# Concepts
+message("Concepts samples on")
+add_subdirectory(concepts)
+
 # Generic test that uses conan libs
 add_executable(intro main.cpp)
 target_link_libraries(
