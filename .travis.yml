@@ -11,51 +11,52 @@ install:
 
 jobs:
   include:
-    # can't find gcc-10.0
-    - os: osx
-      compiler: gcc-10
-      osx_image: xcode12.2    # includes which gcc by default?
-      env:
-        - GCC_VER="10"
-        - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
-      addons:
-        homebrew:
-          packages:
-          - gcc@10
+    # Disable OSX builds to save credits
+    # - os: osx
+    #   compiler: gcc-10
+    #   osx_image: xcode12.2    # includes which gcc by default?
+    #   env:
+    #     - GCC_VER="10"
+    #     - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - gcc@10
     
-    # got the correct version, but still barfs including concepts header
-    # Apple clang is apparently behind and doesn't have concepts yet. 
-    - os: osx
-      compiler: clang-11
-      osx_image: xcode12.2
-      addons:
-        homebrew:
-          packages:
-          - llvm@11
-      env:
-        - LLVM_VER="11"
-        - MATRIX_EVAL="CC=clang-${LLVM_VER} && CXX=clang++-${LLVM_VER}"
+    # # got the correct version, but still barfs including concepts header
+    # # Apple clang is apparently behind and doesn't have concepts yet. 
+    # - os: osx
+    #   compiler: clang-11
+    #   osx_image: xcode12.2
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - llvm@11
+    #   env:
+    #     - LLVM_VER="11"
+    #     - MATRIX_EVAL="CC=clang-${LLVM_VER} && CXX=clang++-${LLVM_VER}"
 
-    
-    - os: linux
-      dist: focal
-      compiler: gcc
-      env:
-        - GCC_VER="10"
-        - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
 
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            # I couldn't get ${GCC_VER} in here successfully
-            - gcc-10
-            - g++-10
-            - doxygen
-            - python3-pip
-      after_script:
-        - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-${GCC_VER}
+    # temp disable to save credit    
+    # - os: linux
+    #   dist: focal
+    #   compiler: gcc
+    #   env:
+    #     - GCC_VER="10"
+    #     - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
+
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         # I couldn't get ${GCC_VER} in here successfully
+    #         - gcc-10
+    #         - g++-10
+    #         - doxygen
+    #         - python3-pip
+    #   after_script:
+    #     - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-${GCC_VER}
 
     # clang 10 is default on focal
     # https://docs.travis-ci.com/user/reference/focal/#compilers-and-build-toolchain
