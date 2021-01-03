@@ -26,8 +26,15 @@ jobs:
     # got the correct version, but still barfs including concepts header
     # Apple clang is apparently behind and doesn't have concepts yet. 
     - os: osx
-      compiler: clang-12.0
+      compiler: clang-11
       osx_image: xcode12.2
+      addons:
+        homebrew:
+          packages:
+          - llvm@11
+      env:
+        - LLVM_VER="11"
+        - MATRIX_EVAL="CC=clang-${LLVM_VER} && CXX=clang++-${LLVM_VER}"
 
     
     - os: linux
@@ -58,13 +65,13 @@ jobs:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            #- llvm-toolchain-focal-10.0 # needed?
+            #- llvm-toolchain-focal-11 # needed?
           packages:
-            - clang-10.0
+            - clang-11
             - doxygen
             - python3-pip
       env:
-        - MATRIX_EVAL="CC=clang-10.0 && CXX=clang++-10.0"
+        - MATRIX_EVAL="CC=clang-11 && CXX=clang++-11"
 
 
 before_script:
