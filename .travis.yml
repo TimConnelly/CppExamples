@@ -62,13 +62,17 @@ jobs:
     # https://docs.travis-ci.com/user/reference/focal/#compilers-and-build-toolchain
     - os: linux
       dist: focal
+      before_script:
+        - wget https://apt.llvm.org/llvm.sh
+        - chmod +x llvm.sh
+        - sudo ./llvm.sh 11
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-focal-11
+            # - llvm-toolchain-focal-11
           packages:
-            - clang-11
+            # - clang-11 # before_script installs clang tools
             - doxygen
             - python3-pip
       env:
