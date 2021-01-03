@@ -65,7 +65,7 @@ jobs:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            #- llvm-toolchain-focal-11 # needed?
+            - llvm-toolchain-focal-11
           packages:
             - clang-11
             - doxygen
