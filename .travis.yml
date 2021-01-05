@@ -76,6 +76,8 @@ jobs:
             # - clang-11 # before_script installs clang tools
             - doxygen
             - python3-pip
+            - gcc-10  # for libstbc++
+            - g++-10
       env:
         - MATRIX_EVAL="CC=clang-11 && CXX=clang++-11"
 
