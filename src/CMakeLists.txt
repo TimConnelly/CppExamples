@@ -6,6 +6,12 @@ if(CPP_STARTER_BUILD_CONCEPTS)
   add_subdirectory(concepts)
 endif()
 
+# Coroutines
+if(CPP_STARTER_BUILD_COROUTINES)
+  message("Coroutines samples on")
+  add_subdirectory(coroutines)
+endif()
+
 # Generic test that uses conan libs
 add_executable(intro main.cpp)
 target_link_libraries(
