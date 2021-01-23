@@ -1,4 +1,5 @@
 option(CPP_STARTER_BUILD_CONCEPTS "Enable compilation of Concepts examples" ON)
+option(CPP_STARTER_BUILD_COROUTINES "Enable compilation of Coroutines examples" ON)
 
 # Concepts
 if(CPP_STARTER_BUILD_CONCEPTS)
