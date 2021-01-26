@@ -25,8 +25,13 @@ class resumable {
     ~resumable() { m_handle.destroy(); }
 
     bool resume() {
-      if (!m_handle.done())
-        m_handle.resume();
+      std::cout << "resuming" << newline;
+      if (!m_handle.done()) {
+        char temp;
+        std::cin >> temp;
+        if (temp == 'x')
+          m_handle.resume();
+      }
       return !m_handle.done();
     }
     const char* return_val();
@@ -42,9 +47,11 @@ struct resumable::promise_type{
     return coro_handle::from_promise(*this);
   }
   auto initial_suspend() {
-    return std::suspend_always();
+    std::cout << "initial suspend" << newline;
+    return std::suspend_never();
   }
   auto final_suspend() noexcept {
+    std::cout << "final suspend" << newline;
     return std::suspend_always();
   }
   void return_value(const char* string) { m_string = string; } 
@@ -75,7 +82,7 @@ resumable hello_coworld()
 void first_test()
 {
   resumable res = hello_coworld();
-  std::cout << "Initial return_val: " << res.return_val() << newline;
+  std::cout << "Press 'x' to end coroutine." << newline;
   while(res.resume())
     ;
   std::cout << res.return_val() << newline;
