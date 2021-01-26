@@ -55,12 +55,6 @@ struct resumable::promise_type{
     return std::suspend_always();
   }
   void return_value(const char* string) { m_string = string; } 
-  // void* operator new(std::size_t) noexcept {
-  //   return nullptr;
-  // }
-  // static resumable get_return_object_on_allocation_failure() {
-  //   throw std::bad_alloc();
-  // }
   void unhandled_exception() {
     std::terminate();
   }
