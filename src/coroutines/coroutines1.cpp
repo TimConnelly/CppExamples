@@ -29,11 +29,13 @@ class resumable {
         m_handle.resume();
       return !m_handle.done();
     }
+    const char* return_val();
   private:
     coro_handle m_handle;
 };
 
 struct resumable::promise_type{
+  const char* m_string = "promise";
   using coro_handle =  std::coroutine_handle<promise_type>;
 
   resumable get_return_object() {
@@ -45,23 +47,38 @@ struct resumable::promise_type{
   auto final_suspend() noexcept {
     return std::suspend_always();
   }
-  void return_void() {}
+  void return_value(const char* string) { m_string = string; } 
+  // void* operator new(std::size_t) noexcept {
+  //   return nullptr;
+  // }
+  // static resumable get_return_object_on_allocation_failure() {
+  //   throw std::bad_alloc();
+  // }
   void unhandled_exception() {
     std::terminate();
   }
 };
+
+const char* resumable::return_val() 
+{
+  return m_handle.promise().m_string;
+}
 
 resumable hello_coworld()
 {
   std::cout << "Hello " << newline;
   co_await std::suspend_always();
   std::cout << "World" << newline;
+  co_return "Coroutine";
 }
 
 void first_test()
 {
   resumable res = hello_coworld();
-  while(res.resume());
+  std::cout << "Initial return_val: " << res.return_val() << newline;
+  while(res.resume())
+    ;
+  std::cout << res.return_val() << newline;
 }
 
 int main(int argc, const char **argv)
