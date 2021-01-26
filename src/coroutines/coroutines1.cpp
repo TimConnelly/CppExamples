@@ -5,13 +5,19 @@
 static constexpr char newline = '\n';
 
 /*
+A basic example, if there is such thing as a basic example of coroutines 
+right now. 
+
+The idea is to for the coroutine to wait for a specific input before continuing.
+
+Adapted from this article on panicsoftware blog:
+https://blog.panicsoftware.com/your-first-coroutine/
+
 For reference:
 https://en.cppreference.com/w/cpp/language/coroutines
 
 Raymond Chen covers TS basics
 https://devblogs.microsoft.com/oldnewthing/20191209-00/?p=103195
-
-https://blog.panicsoftware.com/your-first-coroutine/
 */
 
 class resumable {
