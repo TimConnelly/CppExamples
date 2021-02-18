@@ -33,14 +33,14 @@ class resumable {
         
       return !m_handle.done();
     }
-    const char* return_val();
-    const char* recent_val();
+    const int return_val();
+    const int recent_val();
   private:
     coro_handle m_handle;
 };
 
 struct resumable::promise_type{
-  const char* m_string = "promise";
+  int m_value = 0;
   using coro_handle =  std::coroutine_handle<promise_type>;
 
   resumable get_return_object() {
@@ -54,9 +54,9 @@ struct resumable::promise_type{
     std::cout << "final suspend" << newline;
     return std::suspend_always();
   }
-  void return_value(const char* string) { m_string = string; } 
-  auto yield_value(const char* string) {
-    m_string = string;
+  void return_value(const int value) { m_value = value; } 
+  auto yield_value(const int value) {
+    m_value = value;
     return std::suspend_always();
   }
   void unhandled_exception() {
@@ -64,21 +64,21 @@ struct resumable::promise_type{
   }
 };
 
-const char* resumable::return_val() 
+const int resumable::return_val() 
 {
-  return m_handle.promise().m_string;
+  return m_handle.promise().m_value;
 }
 
-const char* resumable::recent_val()
+const int resumable::recent_val()
 {
-  return m_handle.promise().m_string;
+  return m_handle.promise().m_value;
 }
 
 resumable generate_foo()
 {
+  int value = 0;
   while(true) {
-    co_yield "Hello";
-    co_yield "Coroutine";
+    co_yield value++;
   }
 }
 
