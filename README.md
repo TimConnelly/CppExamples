@@ -364,6 +364,10 @@ For Visual Studio, give the build configuration (Release, RelWithDeb, Debug, etc
 
     cmake --build ./build -- /p:configuration=Release
 
+### Clean build
+
+	cmake --build ./build --target clean
+
 ## Troubleshooting
 
 ### Update Conan
