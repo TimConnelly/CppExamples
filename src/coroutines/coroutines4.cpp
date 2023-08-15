@@ -1,13 +1,9 @@
 #include <coroutine>
 #include <iostream>
-// #include <filesystem>
-// #include <vector>
-// #include <regex>
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "httplib.h"
 
-namespace fs = std::filesystem;
 static constexpr char NEWLINE {'\n'};
 
 httplib::Result make_request(const std::string& host, const std::string& uri)
@@ -44,6 +40,8 @@ struct S
     }
 };
 
+namespace crq{
+
 void get(const std::string& host, const std::string& val)
 {
     coroutine h = [](const std::string& host, const std::string& uri) -> coroutine //
@@ -63,10 +61,16 @@ void get(const std::string& host, const std::string& val)
     h.destroy();
 }
 
+}
+
 int main() {
-    // get("https://reqres.in","/api/users/2");
-    get("http://localhost:18080",R"(/)");
-    get("http://localhost:18080",R"(/about)");
-    get("http://localhost:18080",R"(/json)");
-    get("http://localhost:18080",R"(/json_list)");
+    try {
+        // get("https://reqres.in","/api/users/2");
+        crq::get("http://localhost:18080",R"(/)");
+        crq::get("http://localhost:18080",R"(/about)");
+        crq::get("http://localhost:18080",R"(/json)");
+        crq::get("http://localhost:18080",R"(/json_list)");
+    } catch (...) {
+        std::cout << "unknown exception" << NEWLINE;
+    }
 }
