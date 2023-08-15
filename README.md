@@ -8,6 +8,8 @@ Getting to know C++20.
 ![CMake](https://github.com/TimConnelly/CppExamples/workflows/CMake/badge.svg)
 
 
+Note: The Conan remote repo is broken. See Issue #2.
+
 ## Getting Started
 
 ## Dependencies
